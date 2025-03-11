@@ -1,0 +1,91 @@
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    text-align: center;
+    padding: 20px;
+    color: white;
+}
+
+/* Chat Container */
+.chat-container {
+    width: 50%;
+    margin: auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Chat Box */
+.chat-box {
+    height: 350px;
+    width: 100%;
+    overflow-y: auto;
+    border: none;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Chat Messages */
+.message {
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 75%;
+    word-wrap: break-word;
+}
+
+/* User Messages */
+.user-message {
+    background: #4caf50;
+    color: white;
+    align-self: flex-end;
+}
+
+/* Bot Messages */
+.bot-message {
+    background: #ddd;
+    color: black;
+    align-self: flex-start;
+}
+
+/* Input Area */
+.input-area {
+    margin-top: 10px;
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+/* Input Field */
+input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Send Button */
+button {
+    padding: 12px 20px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #45a049;
+}

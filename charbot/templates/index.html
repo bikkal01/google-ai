@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot Interface</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    let currentRequest = null;
+
+    $(document).ready(function() {
+      $("#send-btn").click(function() {
+        let userMessage = $("#user-input").val();
+        if (userMessage.trim() !== "") {
+          sendMessage(userMessage);
+        }
+      });
+
+      $("#user-input").keypress(function(event) {
+        if (event.key === "Enter") {
+          let userMessage = $("#user-input").val();
+          if (userMessage.trim() !== "") {
+            sendMessage(userMessage);
+          }
+        }
+      });
+
+      function sendMessage(message) {
+        // If a previous request is still in progress, abort it
+        if (currentRequest) {
+          currentRequest.abort();
+        }
+
+        // Send the current message
+        currentRequest = $.ajax({
+          url: "/chat",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({ "message": message }),
+          success: function(response) {
+            // Display the response from the bot
+            $("#chat").append(`<div class="user-message">You: ${message}</div>`);
+            $("#chat").append(`<div class="bot-response">AI: ${response.response}</div>`);
+            $("#user-input").val(""); // Clear the input field
+            $('#chat').scrollTop($('#chat')[0].scrollHeight); // Scroll to the bottom
+          },
+          error: function(error) {
+            $("#chat").append(`<div class="error-message">Error: ${error.responseText}</div>`);
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div id="chat-container">
+    <div id="chat"></div>
+    <input id="user-input" type="text" placeholder="Type your message...">
+    <button id="send-btn">Send</button>
+  </div>
+</body>
+</html>
